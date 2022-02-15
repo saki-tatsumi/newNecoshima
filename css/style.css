@@ -30,7 +30,6 @@ a {
 }
 
 
-
 /*SP*/
 
 .pcOnly {
@@ -53,6 +52,10 @@ h-logo
   max-width: 150px;
 }
 
+.h-logo a {
+  display: inline;
+}
+
 /*============
 nav
 =============*/
@@ -66,7 +69,7 @@ nav {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   transition: all 0.5s;
-  z-index: 3;
+  z-index: 4;
   opacity: 0;
 }
 .open nav {
@@ -75,11 +78,10 @@ nav {
 }
 nav .inner {
   padding: 25px;
-  height: 390px;
+  height: 370px;
   
 }
 nav .inner ul {
-  list-style: none;
   margin: 0;
   padding: 0;
 }
@@ -90,22 +92,23 @@ nav .inner ul li {
   text-align: center;
 }
 nav .inner ul li a {
-  display: block;
   color: #fff;
   font-size: 1.4rem;
   padding: 1em;
   text-decoration: none;
   transition-duration: 0.2s;
 }
+
 nav .inner ul li a:hover {
-  background: #e4e4e4;
+  background-color: #fff;
+  color: #b18653;
+  transition: all .5s;
 }
 
 /*============
 .toggle_btn
 =============*/
 .toggle_btn {
-  display: block;
   position: fixed;
   top: 22px;
   right: 16px;
@@ -148,6 +151,45 @@ nav .inner ul li a:hover {
   -webkit-transform: translateY(-10px) rotate(315deg);
   transform: translateY(-10px) rotate(315deg);
 }
+
+
+/* スクロール途中でヘッダーが消え、上にスクロールすると復活 */
+
+/*上に上がる動き*/
+
+#header.UpMove{
+  animation: UpAnime 0.5s forwards;
+}
+
+@keyframes UpAnime{
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+}
+
+/*下に下がる動き*/
+
+#header.DownMove{
+  animation: DownAnime 0.5s forwards;
+}
+@keyframes DownAnime{
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
 
 /*============
 #mask
@@ -271,16 +313,12 @@ section {
 
 
 
-
-
-
 /*============
 price
 =============*/
 
-
 h1 {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-size: 1.8rem;
   text-align: center;
   line-height: 0.9;
@@ -450,22 +488,6 @@ sns
 
 /*パソコン*/
 
-
-
-@media only screen and (min-width: 930px) {
-  
-  header .pcNav li:last-of-type {
-        border-right: 1px solid #fff;
-  }
-  
-  header .pcNav li:first-of-type {
-        border-left: 1px solid #fff;
-  }
- 
-}
-
-
-
 @media only screen and (min-width: 699px) {
   .pcOnly {
     display: block;
@@ -489,40 +511,55 @@ sns
     z-index: 1;
   }
 
-  .pcNav0 {
+  nav {
+    opacity: 1;
+  }
+
+  nav .inner {
     z-index: 8;
     position: fixed;
     top: 74px;
+    width: 100%;
+    padding: 0;
+    background-color: #b18653;
+    height: 50px;
+  }
+
+  .inner ul {
+    height: 50px;
+    z-index: 8;
+    position: fixed;
+    top: 0;
     background-color: #b18653;
     width: 100%;
-  }
-
-  .pcNav {
     display: flex;
     justify-content: center;
-    /* max-width: 1300px; */
   }
 
-  .pcNav li {
-    border-left: 1px solid #fff;
-  }  
-
-  .pcNav li img {
+  nav .inner ul li {
+    border-bottom: none;
     height: 50px;
-    line-height: 50px;
-    object-fit: cover;
+    line-height: 68px;
+    border-left: 1px solid #fff;
+    width: 155px;  
   }
-  .pcNav li img:hover {
-    opacity: 0.7;
-    transition: all .5s;
+
+  nav .inner ul li a {
+    font-size: 2.0rem;
+    width: 100%;
+    padding: 10px 0;
+    line-height: 17px;
+    height: 100%;
+    display: block;
   }
   
-  .pcNav li:first-of-type {
+  .inner li:first-of-type {
     border-left: 1px solid #b18653; 
   } 
 
-  nav {
-    visibility: hidden;
+  .inner span {
+    font-size: 0.5rem;
+    height: 20px;
   }
 
   main {
@@ -596,12 +633,6 @@ sns
   .catimg li + li {
     margin-left: 10px;
   }
-/* 
-
-  .slider {
-    width: 100%;
-    margin: 0 auto;
-  } */
 
   .slider_wrap {
     margin: 30px calc(-40vw + 40%) 0 calc(-40vw + 40%);
@@ -649,3 +680,16 @@ sns
 }
 
 }
+
+
+@media only screen and (min-width: 930px) {
+
+  header .inner li:last-of-type {
+    border-right: 1px solid #fff;
+  }
+  
+  header .inner li:first-of-type {
+    border-left: 1px solid #fff;
+  }
+}
+
